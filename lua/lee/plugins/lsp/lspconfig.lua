@@ -108,20 +108,20 @@ return {
 		vim.lsp.enable("lua_ls")
 
 		-- gopls
-		vim.lsp.config(
-			"gopls", {
-				settings = {
-					gopls = {
-						analyses = {
-							unusedparams = true,
-						},
-						staticcheck = true,
-						gofumpt = true,
-					},
-				},
-			}
-		)
-		vim.lsp.enable("gopls")
+		-- vim.lsp.config(
+		-- 	"gopls", {
+		-- 		settings = {
+		-- 			gopls = {
+		-- 				analyses = {
+		-- 					unusedparams = true,
+		-- 				},
+		-- 				staticcheck = true,
+		-- 				gofumpt = true,
+		-- 			},
+		-- 		},
+		-- 	}
+		-- )
+		-- vim.lsp.enable("gopls")
 
 		-- pylsp
 		-- https://github.com/python-lsp/python-lsp-server/blob/develop/CONFIGURATION.md
@@ -158,7 +158,7 @@ return {
 
 		-- java_language_server
 		-- https://github.com/georgewfraser/java-language-server
-		vim.lsp.enable('java_language_server')
+		-- vim.lsp.enable('java_language_server')
 
 		-- clangd
 		vim.lsp.enable("clangd")

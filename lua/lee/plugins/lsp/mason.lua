@@ -30,10 +30,10 @@ return {
 			-- Ref: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
 			ensure_installed = {
 				"lua_ls",
-				"gopls",  -- Go language server
+				-- "gopls",  -- Go language server
 				"pylsp",
 				"rust_analyzer",
-				"java_language_server",
+				-- "java_language_server",
 				"fish_lsp",
 				"clangd",
 			},
