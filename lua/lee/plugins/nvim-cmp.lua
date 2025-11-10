@@ -141,13 +141,13 @@ return {
                     -- inserts a hard tab.
                     keys = '<Tab>'
                 else
-                    local sw = shift_width()
+                    local shift_w = shift_width()
                     local previous_char = prefix:sub(#prefix, #prefix)
                     local previous_column = #prefix - #previous_char + 1
                     local current_column = vim.fn.virtcol({ vim.fn.line('.'), previous_column }) + 1
-                    local remainder = (current_column - 1) % sw
-                    local move = remainder == 0 and sw or sw - remainder
-                    keys = (' '):rep(move)
+                    local remainder = (current_column - 1) % shift_w
+                    local sp_move = remainder == 0 and shift_w or shift_w - remainder
+                    keys = (' '):rep(sp_move)
                 end
             end
 
