@@ -52,3 +52,6 @@ vim.opt.splitbelow = true
 
 --[[ Editor Config --]]
 vim.g.editorconfig = true
+
+--[[ Python Config --]]
+vim.g.python3_host_prog = vim.fn.expand("$HOME") .. "/.local/share/nvim/python3-venv/bin/python3"
