@@ -38,7 +38,7 @@ return {
 					dismiss = "<M-u>"
 				}
 			},
-			copilot_node_command = vim.fn.expand("$HOME") .. "/.nvm/versions/node/v24.11.0/bin/node",
+			copilot_node_command = vim.fn.expand("$HOME") .. "/.nvm/versions/node/v22.21.1/bin/node",
 			workspace_folders = {},
 			copilot_model = "",
 		})
