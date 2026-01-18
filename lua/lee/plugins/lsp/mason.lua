@@ -41,11 +41,15 @@ return {
 
 		mason_tool_installer.setup({
 			ensure_installed = {
+				-- Formatter
 				"prettier",
 				"stylua",
 				"isort",
+				"clang-format",
+				-- Linter
 				"pylint",
-				"clangd",
+				-- Debugger Adapter
+				"codelldb",
 			},
 		})
 	end,
