@@ -80,8 +80,27 @@ vim.keymap.set("n", "<LEADER>wj", "<C-w>j", _make_opts({ desc = "Move to window 
 vim.keymap.set("n", "<LEADER>wk", "<C-w>k", _make_opts({ desc = "Move to window split above" }))
 
 -- Terminal Control Setting
+-- Terminal Mode
 vim.keymap.set("n", "<LEADER>co", "<cmd>terminal<CR>", _make_opts({ desc = "Open terminal buffer in cwd" }))
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", _make_opts({ desc = "Exit terminal editing" }))
+
+-- View single cmd result
+vim.api.nvim_create_user_command("RunShellCommand", function(opts)
+	local output = vim.fn.systemlist(opts.args)
+
+	vim.cmd("new")
+	local _buf = vim.api.nvim_get_current_buf()
+	vim.bo[_buf].buftype = 'nofile'
+	vim.bo[_buf].bufhidden = 'wipe'
+	vim.bo[_buf].swapfile = false
+
+	-- Write command result
+	vim.api.nvim_buf_set_lines(_buf, 0, -1, false, output)
+
+	-- Set Buf to readonly after record result
+	vim.bo[_buf].modifiable = false
+	vim.bo[_buf].readonly = true
+end, { nargs = "+", complete = "shellcmd", desc = "Run shell command and display result in new buf" })
 
 -- File Control Setting
 vim.keymap.set(
