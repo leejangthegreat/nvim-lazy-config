@@ -1,10 +1,7 @@
 local _default_km_opts = { noremap = true, silent = true }
 
 local function _make_opts(overrides)
-	return setmetatable(
-		overrides or {},
-		{ __index = _default_km_opts }
-	)
+	return vim.tbl_extend("force", _default_km_opts, overrides or {})
 end
 
 
@@ -81,6 +78,10 @@ vim.keymap.set("n", "<LEADER>wh", "<C-w>h", _make_opts({ desc = "Move to left wi
 vim.keymap.set("n", "<LEADER>wl", "<C-w>l", _make_opts({ desc = "Move to right window split" }))
 vim.keymap.set("n", "<LEADER>wj", "<C-w>j", _make_opts({ desc = "Move to window split below" }))
 vim.keymap.set("n", "<LEADER>wk", "<C-w>k", _make_opts({ desc = "Move to window split above" }))
+
+-- Terminal Control Setting
+vim.keymap.set("n", "<LEADER>co", "<cmd>terminal<CR>", _make_opts({ desc = "Open terminal buffer in cwd" }))
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", _make_opts({ desc = "Exit terminal editing" }))
 
 -- File Control Setting
 vim.keymap.set(
