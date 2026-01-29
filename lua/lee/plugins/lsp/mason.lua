@@ -48,8 +48,7 @@ return {
 				"clang-format",
 				-- Linter
 				"pylint",
-				-- Debugger Adapter
-				"codelldb",
+				-- Debugger Adapter (moved to mason-nvim-dap in dap.lua)
 			},
 		})
 	end,
