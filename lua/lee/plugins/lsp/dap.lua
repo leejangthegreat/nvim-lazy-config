@@ -23,14 +23,6 @@ return {
 			local dap = require("dap")
 			local widgets = require("dap.ui.widgets")
 
-			-- Fixed Views
-			local sessions_view = widgets.centered_float(widgets.sessions)
-			local scopes_view = widgets.centered_float(widgets.scopes)
-			local frames_view = widgets.centered_float(widgets.frames)
-			local expression_view = widgets.centered_float(widgets.expression)
-			local threads_view = widgets.centered_float(widgets.threads)
-
-
 			vim.keymap.set("n", "<F6>", function()
 				dap.continue()
 			end, _make_opts({ desc = "Resume execution when thread stopped" }))
@@ -60,23 +52,23 @@ return {
 			end, _make_opts({ desc = "Toggle debugger REPL" }))
 
 			vim.keymap.set("n", "<LEADER>bv", function()
-				expression_view.toggle()
+				widgets.hover()
 			end, _make_opts({ desc = "Evaluate the expression and display result" }))
 
 			vim.keymap.set("n", "<LEADER>bf", function()
-				frames_view.toggle()
+				widgets.centered_float(widgets.frames)
 			end, _make_opts({ desc = "Display debug frame view (centered)" }))
 
 			vim.keymap.set("n", "<LEADER>bs", function()
-				scopes_view.toggle()
+				widgets.centered_float(widgets.scopes)
 			end, _make_opts({ desc = "Display debug scope view (centered)" }))
 
 			vim.keymap.set("n", "<LEADER>bS", function()
-				sessions_view.toggle()
+				widgets.centered_float(widgets.sessions)
 			end, _make_opts({ desc = "Display debug session view (centered)" }))
 
 			vim.keymap.set("n", "<LEADER>bt", function()
-				threads_view.toggle()
+				widgets.centered_float(widgets.threads)
 			end, _make_opts({ desc = "Display debug thread view (centered)" }))
 
 		end,
