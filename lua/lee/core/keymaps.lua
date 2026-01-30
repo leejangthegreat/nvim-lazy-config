@@ -78,6 +78,7 @@ vim.keymap.set("n", "<LEADER>wh", "<C-w>h", _make_opts({ desc = "Move to left wi
 vim.keymap.set("n", "<LEADER>wl", "<C-w>l", _make_opts({ desc = "Move to right window split" }))
 vim.keymap.set("n", "<LEADER>wj", "<C-w>j", _make_opts({ desc = "Move to window split below" }))
 vim.keymap.set("n", "<LEADER>wk", "<C-w>k", _make_opts({ desc = "Move to window split above" }))
+vim.keymap.set("n", "<LEADER>wt", "<C-w>T", _make_opts({ desc = "Move current buffer to new tab" }))
 
 -- Terminal Control Setting
 -- Terminal Mode
