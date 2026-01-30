@@ -24,11 +24,11 @@ return {
 						)
 
 						-- Push with rebase
-						vim.keymap.set(
-							"n", "<LEADER>gp", function()
-								vim.cmd.Git({ "push", "--rebase" })
-							end, opts
-						)
+						-- vim.keymap.set(
+						-- 	"n", "<LEADER>gp", function()
+						-- 		vim.cmd.Git({ "push", "--rebase" })
+						-- 	end, opts
+						-- )
 					end,
 				}
 			)
@@ -41,46 +41,53 @@ return {
 			on_attach = function(bufnr)
 				local gs = package.loaded.gitsigns
 
-				local function map(mode, l, r, desc)
+				local function _map(mode, l, r, desc)
 					vim.keymap.set(mode, l ,r, { buffer = bufnr, desc = desc })
 				end
 
 				-- Navigation between hunks
-				map("n", "]h", gs.next_hunk, "Move to next hunk")
-				map("n", "[h", gs.prev_hunk, "Move to previous hunk")
+				_map("n", "]h", gs.next_hunk, "Move to next hunk")
+				_map("n", "[h", gs.prev_hunk, "Move to previous hunk")
 
 				-- Git actions
-				map("n", "<LEADER>gs", gs.stage_hunk, "Stage hunk lines under cursor")
-				map("n", "<LEADER>gr", gs.reset_hunk, "Reset hunk lines under cursor")
-				map(
+				_map("n", "<LEADER>gs", gs.stage_hunk, "Stage hunk lines under cursor")
+				_map("n", "<LEADER>gr", gs.reset_hunk, "Reset hunk lines under cursor")
+				_map(
 					"v", "<LEADER>gs", function()
 						gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
 					end, "Stage visually selected hunk"
 				)
-				map(
+				_map(
 					"v", "<LEADER>gr", function()
 						gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
 					end, "Reset visually selected hunk"
 				)
 
-				map("n", "<LEADER>gS", gs.stage_buffer, "Stage entire buffer")
-				map("n", "<LEADER>gr", gs.reset_buffer, "Reset entire buffer")
-				map("n", "<LEADER>gu", gs.undo_stage_hunk, "Undo stage hunk (not reset file)")
-				map("n", "<LEADER>gp", gs.preview_hunk, "Preview hunk info")
-				map(
+				_map("n", "<LEADER>gS", gs.stage_buffer, "Stage entire buffer")
+				_map(
+					"n", "<LEADER>gR", function()
+						local _confirm = vim.fn.confirm("Reset entire buffer?", "&yes\n&no", 2)
+						if _confirm == 1 then
+							gs.reset_buffer()
+						end
+					end, "Reset entire buffer"
+				)
+				_map("n", "<LEADER>gu", gs.undo_stage_hunk, "Undo stage hunk (not reset file)")
+				_map("n", "<LEADER>gp", gs.preview_hunk, "Preview hunk info")
+				_map(
 					"n", "<LEADER>gb", function()
 						gs.blame_line({ full = true })
 					end, "Check git blame line"
 				)
-				map("n", "<LEADER>gB", gs.toggle_current_line_blame, "Toggle line blame")
-				map("n", "<LEADER>gd", gs.diffthis, "Diff this")
-				map(
+				_map("n", "<LEADER>gB", gs.toggle_current_line_blame, "Toggle line blame")
+				_map("n", "<LEADER>gd", gs.diffthis, "Diff this")
+				_map(
 					"n", "<LEADER>gD", function()
 						gs.diffthis("~")
 					end, "Diff this ~"
 				)
 
-				map(
+				_map(
 					{ "o", "x" }, "<LEADER>gv",
 					":<C-U>Gitsigns select_hunk<CR>", "Select hunk"
 				)
