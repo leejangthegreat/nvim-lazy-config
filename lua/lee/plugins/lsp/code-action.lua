@@ -11,6 +11,8 @@ return {
 		none_ls.setup({
 			sources = {
 				none_ls.builtins.formatting.clang_format,
+				none_ls.builtins.formatting.stylua,
+				none_ls.builtins.formatting.ruff,
 			},
 			on_attach = function(client, bufnr)
 				if client:supports_method("textDocument/formatting") then

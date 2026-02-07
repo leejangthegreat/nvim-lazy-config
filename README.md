@@ -3,4 +3,6 @@ This is my neovim configuration repo constructed on lazy.nvim plugins. The Confi
 
 # Requirement
 ## LSP
-
+- Ruff (format / lint)
+- Stylua
+- Clang-format

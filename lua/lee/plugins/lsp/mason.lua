@@ -42,12 +42,11 @@ return {
 		mason_tool_installer.setup({
 			ensure_installed = {
 				-- Formatter
-				"prettier",
 				"stylua",
-				"isort",
 				"clang-format",
+				"ruff",
 				-- Linter
-				"pylint",
+				-- ruff
 				-- Debugger Adapter (moved to mason-nvim-dap in dap.lua)
 			},
 		})
