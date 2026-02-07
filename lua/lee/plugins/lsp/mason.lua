@@ -34,7 +34,6 @@ return {
 				"pylsp",
 				"rust_analyzer",
 				-- "java_language_server",
-				"fish_lsp",
 				"clangd",
 			},
 		})
