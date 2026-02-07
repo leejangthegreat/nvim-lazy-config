@@ -7,56 +7,50 @@ return {
 	},
 	config = function()
 		-- LSP key binds
-		vim.api.nvim_create_autocmd(
-			"LspAttach", {
-				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-				callback = function(ev)
-					-- Buffer local mappings
-					local opts = { buffer = ev.buf, silent = true }
+		vim.api.nvim_create_autocmd("LspAttach", {
+			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+			callback = function(ev)
+				-- Buffer local mappings
+				local opts = { buffer = ev.buf, silent = true }
 
-					opts.desc = "Show LSP references"
-					vim.keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)
+				opts.desc = "Show LSP references"
+				vim.keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)
 
-					opts.desc = "Go to declaration"
-					vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+				opts.desc = "Go to declaration"
+				vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
 
-					opts.desc = "Show LSP definitions"
-					vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
+				opts.desc = "Show LSP definitions"
+				vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
 
-					opts.desc = "Show LSP implementations"
-					vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
+				opts.desc = "Show LSP implementations"
+				vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
 
-					opts.desc = "Show LSP type definitions"
-					vim.keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
+				opts.desc = "Show LSP type definitions"
+				vim.keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
 
-					opts.desc = "See available code actions"
-					vim.keymap.set(
-						{ "n", "v" }, "<LEADER>vca", function()
-							vim.lsp.buf.code_action()
-						end, opts
-					)
+				opts.desc = "See available code actions"
+				vim.keymap.set({ "n", "v" }, "<LEADER>vca", function()
+					vim.lsp.buf.code_action()
+				end, opts)
 
-					opts.desc = "Smart rename"
-					vim.keymap.set("n", "grn", vim.lsp.buf.rename, opts)
+				opts.desc = "Smart rename"
+				vim.keymap.set("n", "grn", vim.lsp.buf.rename, opts)
 
-					opts.desc = "Show buffer diagnostics"
-					vim.keymap.set("n", "gL", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
+				opts.desc = "Show buffer diagnostics"
+				vim.keymap.set("n", "gL", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
 
-					opts.desc = "Show line diagnostics"
-					vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
+				opts.desc = "Show line diagnostics"
+				vim.keymap.set("n", "gl", vim.diagnostic.open_float, opts)
 
-					opts.desc = "Show documentations"
-					vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+				opts.desc = "Show documentations"
+				vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 
-					opts.desc = "Show symbol signature help"
-					vim.keymap.set(
-						"i", "<C-h>", function()
-							vim.lsp.buf.signature_help()
-						end, opts
-					)
-				end,
-			}
-		)
+				opts.desc = "Show symbol signature help"
+				vim.keymap.set("i", "<C-h>", function()
+					vim.lsp.buf.signature_help()
+				end, opts)
+			end,
+		})
 
 		-- Severity Sign Icons
 		local signs = {
@@ -79,32 +73,30 @@ return {
 		local capabilities = cmp_nvim_lsp.default_capabilities()
 
 		-- Global default LSP settings
-		vim.lsp.config('*', {
+		vim.lsp.config("*", {
 			capabilities = capabilities,
 		})
 
 		-- Enable each LSP
 		-- lua_ls (lua-language-server binary needed in $PATH)
-		vim.lsp.config(
-			"lua_ls", {
-				settings = {
-					Lua = {
-						diagnostics = {
-							globals = { "vim" },
-						},
-						completion = {
-							callSnippet = "Replace",
-						},
-						workspace = {
-							library = {
-								[vim.fn.expand('$VIMRUNTIME/lua')] = true,
-								[vim.fn.stdpath("config") .. "/lua"] = true,
-							},
+		vim.lsp.config("lua_ls", {
+			settings = {
+				Lua = {
+					diagnostics = {
+						globals = { "vim" },
+					},
+					completion = {
+						callSnippet = "Replace",
+					},
+					workspace = {
+						library = {
+							[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+							[vim.fn.stdpath("config") .. "/lua"] = true,
 						},
 					},
 				},
-			}
-		)
+			},
+		})
 		vim.lsp.enable("lua_ls")
 
 		-- gopls
@@ -125,36 +117,86 @@ return {
 
 		-- pylsp
 		-- https://github.com/python-lsp/python-lsp-server/blob/develop/CONFIGURATION.md
-		vim.lsp.config(
-			"pylsp", {
+		-- vim.lsp.config(
+		-- 	"pylsp", {
+		-- 		settings = {
+		-- 			pylsp = {
+		-- 				configurationSources = { "flake8" },
+		-- 				plugins = {
+		-- 					pycodestyle = {
+		-- 						enable = false,
+		-- 					},
+		-- 					mccabe = {
+		-- 						enable = false,
+		-- 					},
+		-- 					pyflakes = {
+		-- 						enable = false,
+		-- 					},
+		-- 					flake8 = {
+		-- 						enable = true,
+		-- 						executable = "flake8",  -- Use system package
+		-- 						indentSize = 4,
+		-- 					},
+		-- 				},
+		-- 			},
+		-- 		},
+		-- 	}
+		-- )
+		-- vim.lsp.enable("pylsp")
+		-- ruff
+		-- https://docs.astral.sh/ruff/editors/setup/
+		vim.lsp.config("ruff", {
+			init_options = {
 				settings = {
-					pylsp = {
-						configurationSources = { "flake8" },
-						plugins = {
-							pycodestyle = {
-								enable = false,
-							},
-							mccabe = {
-								enable = false,
-							},
-							pyflakes = {
-								enable = false,
-							},
-							flake8 = {
-								enable = true,
-								executable = "flake8",  -- Use system package
-								indentSize = 4,
-							},
+					-- configurationPreference = "filesystemFirst", -- Project config > editor config
+					lint = {
+						preview = true,
+						select = {
+							-- See https://docs.astral.sh/ruff/rules/#pycodestyle-e-w
+							"E4",
+							"E7",
+							"E9",
+							"F", -- Default
+							"E1", -- Indentation
+							"E22",
+							"E24",
+							"E25",
+							"E26",
+							"E27", -- Space and Tabs
+							"E3", -- blank lines after and before
+							"E5",
+							"W391", -- Too many new lines at end
+							"W605", -- Invalid escape seq
+							"DOC",
+							"D1",
+							"D200",
+							"D201",
+							"D202",
+							"D211",
+							"D204",
+							"D205",
+							"D209",
+							"D212",
+							"D214",
+							"D215",
+							"D3",
+							"D40",
+							"D417",
+							"D418",
+							"D419",
 						},
 					},
+					format = {
+						preview = true,
+					},
 				},
-			}
-		)
-		vim.lsp.enable("pylsp")
+			},
+		})
+		vim.lsp.enable("ruff")
 
 		-- rust-analyzer
 		-- https://rust-analyzer.github.io/book/configuration.html
-		vim.lsp.enable('rust_analyzer')
+		vim.lsp.enable("rust_analyzer")
 
 		-- java_language_server
 		-- https://github.com/georgewfraser/java-language-server
@@ -162,8 +204,5 @@ return {
 
 		-- clangd
 		vim.lsp.enable("clangd")
-
-		-- fish_lsp
-		vim.lsp.enable('fish_lsp')
 	end,
 }

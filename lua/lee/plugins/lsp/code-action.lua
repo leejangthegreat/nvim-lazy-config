@@ -1,5 +1,5 @@
 return {
-	 "nvimtools/none-ls.nvim",
+	"nvimtools/none-ls.nvim",
 	event = "VeryLazy",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
@@ -12,7 +12,6 @@ return {
 			sources = {
 				none_ls.builtins.formatting.clang_format,
 				none_ls.builtins.formatting.stylua,
-				none_ls.builtins.formatting.ruff,
 			},
 			on_attach = function(client, bufnr)
 				if client:supports_method("textDocument/formatting") then
