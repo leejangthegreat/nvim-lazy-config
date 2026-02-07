@@ -54,7 +54,7 @@ vim.keymap.set("n", "<C-c>", ":nohl<CR>", _make_opts({ desc = "Clear search high
 vim.keymap.set("n", "<LEADER>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace word on cursor globally" })
 
 -- Formatting
-vim.keymap.set("n", "<LEADER>f", vim.lsp.buf.format, _make_opts({ desc = "Format code" }))
+vim.keymap.set({ "n", "v" }, "<LEADER>fc", vim.lsp.buf.format, _make_opts({ desc = "Format code" }))
 vim.keymap.set("n", "<LEADER>x", "<cmd>!chmod +x %<CR>", _make_opts({ desc = "Make current file executable" }))
 
 
