@@ -115,34 +115,46 @@ return {
 		-- )
 		-- vim.lsp.enable("gopls")
 
+		-- Use pylsp for hover and such things, and use ruff for format and lint
 		-- pylsp
 		-- https://github.com/python-lsp/python-lsp-server/blob/develop/CONFIGURATION.md
-		-- vim.lsp.config(
-		-- 	"pylsp", {
-		-- 		settings = {
-		-- 			pylsp = {
-		-- 				configurationSources = { "flake8" },
-		-- 				plugins = {
-		-- 					pycodestyle = {
-		-- 						enable = false,
-		-- 					},
-		-- 					mccabe = {
-		-- 						enable = false,
-		-- 					},
-		-- 					pyflakes = {
-		-- 						enable = false,
-		-- 					},
-		-- 					flake8 = {
-		-- 						enable = true,
-		-- 						executable = "flake8",  -- Use system package
-		-- 						indentSize = 4,
-		-- 					},
+		-- vim.lsp.config("pylsp", {
+		-- 	settings = {
+		-- 		pylsp = {
+		-- 			configurationSources = { "flake8" },
+		-- 			plugins = {
+		-- 				pycodestyle = {
+		-- 					enable = false,
+		-- 				},
+		-- 				mccabe = {
+		-- 					enable = false,
+		-- 				},
+		-- 				pyflakes = {
+		-- 					enable = false,
+		-- 				},
+		-- 				flake8 = {
+		-- 					enable = true,
+		-- 					executable = "flake8", -- Use system package
+		-- 					indentSize = 4,
 		-- 				},
 		-- 			},
 		-- 		},
-		-- 	}
-		-- )
+		-- 	},
+		-- })
 		-- vim.lsp.enable("pylsp")
+
+		-- Use ty for hover and such things, and use ruff for format and lint
+		-- ty
+		-- https://docs.astral.sh/ty/reference/editor-settings/#configuration
+		vim.lsp.config("ty", {
+			settings = {
+				ty = {
+					configuration = {},
+				},
+			},
+		})
+		vim.lsp.enable("ty")
+
 		-- ruff
 		-- https://docs.astral.sh/ruff/editors/setup/
 		vim.lsp.config("ruff", {
@@ -190,6 +202,16 @@ return {
 						preview = true,
 					},
 				},
+			},
+			capabilities = {
+				hoverProvider = false,
+				renameProvider = false,
+				definitionProvider = false,
+				referencesProvider = false,
+				documentSymbolProvider = false,
+				workspaceSymbolProvider = false,
+				implementationProvider = false,
+				typeDefinitionProvider = false,
 			},
 		})
 		vim.lsp.enable("ruff")
