@@ -1,0 +1,42 @@
+return {
+	"stevearc/aerial.nvim",
+	event = { "BufReadPre", "BufNewFile" },
+	dependencies = {
+		"nvim-treesitter/nvim-treesitter",
+		"nvim-tree/nvim-web-devicons",
+	},
+	keys = {
+		{
+			"<LEADER>lo",
+			"<cmd>AerialToggle!<CR>",
+			mode = { "n" },
+			desc = "Toggle Aerial",
+		},
+	},
+	opts = {
+		attach_mode = "global",
+		backends = { "lsp", "treesitter" },
+		close_automatic_events = { "switch_buffer", "unsupported" },
+		keymaps = {
+			["?"] = "actions.show_help",
+			["<CR>"] = "actions.jump",
+			["<C-v>"] = "actions.jump_vsplit",
+			["<C-s>"] = "actions.jump_split",
+			["p"] = "actions.scroll",
+			["<C-j>"] = "actions.down_and_scroll",
+			["<C-k>"] = "actions.up_and_scroll",
+			["{"] = "actions.prev",
+			["}"] = "actions.next",
+			["[["] = "actions.prev_up",
+			["]]"] = "actions.next_up",
+			["q"] = "actions.close",
+			["o"] = "actions.tree_toggle",
+			["O"] = "actions.tree_toggle_recursive",
+			["zr"] = "actions.tree_increase_fold_level",
+			["zR"] = "actions.tree_open_all",
+			["zm"] = "actions.tree_decrease_fold_level",
+			["zM"] = "actions.tree_close_all",
+			["zx"] = "actions.tree_sync_folds",
+		},
+	},
+}
