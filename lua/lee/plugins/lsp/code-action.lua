@@ -10,7 +10,10 @@ return {
 
 		none_ls.setup({
 			sources = {
-				none_ls.builtins.formatting.clang_format,
+				none_ls.builtins.formatting.clang_format.with({
+					filetypes = { "c", "cpp", "cs", "cuda", "proto" },
+					extra_args = {},
+				}),
 				none_ls.builtins.formatting.stylua,
 			},
 			on_attach = function(client, bufnr)
