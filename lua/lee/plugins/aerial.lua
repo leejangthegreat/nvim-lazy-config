@@ -14,7 +14,7 @@ return {
 		},
 	},
 	opts = {
-		attach_mode = "global",
+		attach_mode = "window",
 		backends = { "lsp", "treesitter" },
 		close_automatic_events = { "switch_buffer", "unsupported" },
 		keymaps = {
